@@ -1,0 +1,4 @@
+coverage
+Flask
+jasmine
+Jinja2
