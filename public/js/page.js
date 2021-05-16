@@ -1,5 +1,5 @@
 class Page {
-    onLoad(callback) {
+    static onLoad(callback) {
         if (
             document.readyState === "complete" ||
             (document.readyState !== "loading" && !document.documentElement.doScroll)
@@ -9,5 +9,15 @@ class Page {
         } else {
             document.addEventListener("DOMContentLoaded", callback);
         }
+    }
+
+    static currentPosition(callback) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            callback(position.coords);
+        });
+    }
+
+    static setInterval(callback, intervalTimeInMiliseconds) {
+        setInterval(callback,intervalTimeInMiliseconds); 
     }
 }

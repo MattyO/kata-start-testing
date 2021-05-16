@@ -1,15 +1,14 @@
 Page.onLoad(function(){
-    var app = new App()
+    var app = new App();
 
-    navigator.geolocation.getCurrentPosition(function(position) {
+    Page.currentPosition(function(position){
         console.log('getting starting position');
-        app.setStartPosition(position)
+        app.setStartingPosition(position)
     })
 
-    interval_id = setInterval(function(){
-        navigator.geolocation.getCurrentPosition(function(position) {
+    Page.setInterval(function(){
+        Page.currentPosition(function(position){
                 document.getElementById("distanceTraveled").innerHTML = app.feetTraveled(position);
-            }
         });
     }, 5000)
 

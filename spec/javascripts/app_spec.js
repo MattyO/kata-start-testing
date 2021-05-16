@@ -33,9 +33,6 @@ describe("App", function(){
 })
 
 describe("Page", function() {
-    beforeEach(function(){
-        page = new Page()
-    });
 
     describe(".onLoad", function() {
         beforeEach(function(){
@@ -45,7 +42,7 @@ describe("Page", function() {
         it('calls callback when readyState is complete', function(done){
             spyOnProperty(document, "readyState", "get").and.returnValue('complete');
 
-            page.onLoad(function(){
+            Page.onLoad(function(){
                 callbackCalled  = true;
                 done();
             });
@@ -57,7 +54,7 @@ describe("Page", function() {
             spyOnProperty(document, "readyState", "get").and.returnValue('notloading');
             spyOnProperty(document, "documentElement", "get").and.returnValue({'doScroll': false});
 
-            page.onLoad(function(){
+            Page.onLoad(function(){
                 callbackCalled  = true;
                 done();
             });
@@ -73,11 +70,58 @@ describe("Page", function() {
                 done();
             }
 
-            page.onLoad(callback)
+            Page.onLoad(callback)
 
             expect(callbackCalled).toEqual(false);
             expect(addEventListenerSpy).toHaveBeenCalledWith("DOMContentLoaded", callback);
         });
+
+    })
+    describe(".currentPosition", function() {
+        it("returns the position to the callback", function(done){
+            currentPosition = {latitude: 1, longitude: 1}
+            callbackCalled  = false;
+            callbackArgs = undefined;
+
+            function tcallback(args){
+                callbackArgs = args
+                done();
+            }
+            currentPositionSpy = spyOn(navigator.geolocation, "getCurrentPosition").and
+                .callFake(function(callback) {
+                    callback(currentPosition);
+                });
+            Page.currentPosition(tcallback);
+
+            expect(callbackArgs).toEqual(currentPosition)
+        })
+    })
+
+    describe(".setInterval", function() {
+        var callbackSpy
+
+        beforeEach( function(){
+            callbackSpy = jasmine.createSpy("callback");
+            jasmine.clock().install()
+        })
+
+        afterEach(function() {
+            jasmine.clock().uninstall()
+        })
+
+        it('call set interval', function() {
+            Page.setInterval(function(){
+                callbackSpy();
+            }, 1000);
+
+            jasmine.clock().tick(999)
+            expect(callbackSpy).not.toHaveBeenCalled()
+            jasmine.clock().tick(2)
+            expect(callbackSpy).toHaveBeenCalled()
+        });
+
+
+
 
     })
 })

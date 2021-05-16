@@ -4,7 +4,7 @@ class App {
     }
 
     setStartingPosition(startingPosition){
-        this.startingPosition = startingPosition;
+        this.startingPosition  = startingPosition;
     }
 
     feetTraveled(anotherPosition) {
