@@ -89,7 +89,7 @@ describe("Page", function() {
             }
             currentPositionSpy = spyOn(navigator.geolocation, "getCurrentPosition").and
                 .callFake(function(callback) {
-                    callback(currentPosition);
+                    callback({"coords": currentPosition});
                 });
             Page.currentPosition(tcallback);
 
@@ -119,9 +119,16 @@ describe("Page", function() {
             jasmine.clock().tick(2)
             expect(callbackSpy).toHaveBeenCalled()
         });
+    })
+    describe("setContent", function() {
+        it('set the content by id', function() {
+            elementSpy = jasmine.createSpy("element");
+            getElementbyIdSpy = spyOn(document, 'getElementById').and.returnValue(elementSpy);
 
+            Page.setContent("elementId", 'content');
 
-
-
+            expect(getElementbyIdSpy).toHaveBeenCalledWith("elementId")
+            expect(elementSpy.innerHTML).toEqual("content")
+        })
     })
 })

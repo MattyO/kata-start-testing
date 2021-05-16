@@ -20,4 +20,8 @@ class Page {
     static setInterval(callback, intervalTimeInMiliseconds) {
         setInterval(callback,intervalTimeInMiliseconds); 
     }
+
+    static setContent(id, content){
+        document.getElementById(id).innerHTML = content;
+    }
 }

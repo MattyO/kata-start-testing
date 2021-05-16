@@ -1,6 +1,5 @@
 class App {
-    constructor(startingPosition){
-        this.startingPosition = startingPosition
+    constructor(page){
     }
 
     setStartingPosition(startingPosition){
@@ -14,6 +13,20 @@ class App {
             anotherPosition.latitude,
             anotherPosition.longitude
         )
+    }
+
+    start() {
+        var that = this;
+        Page.currentPosition(function(position){
+            console.log('getting starting position');
+            that.setStartingPosition(position)
+        })
+
+        Page.setInterval(function(){
+            Page.currentPosition(function(position){
+                Page.setContent("distanceTraveled", that.feetTraveled(position));
+            });
+        }, 5000)
     }
 
 }
