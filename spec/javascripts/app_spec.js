@@ -12,16 +12,21 @@ describe("Number", function(){
 })
 
 describe("App", function(){
-    it("can be initalized", function(){
+    beforeEach(function() {
+        app = new App()
+    })
+
+    it('.setStartingPosition', function() {
         startingPosition = {latitude: 1, longitude: 1}
-        app = new App(startingPosition)
+        app.setStartingPosition(startingPosition)
+
         expect(app.startingPosition).toEqual(startingPosition)
     })
 
     it(".feetTraveled", function(){
         startingPosition = {latitude: 1, longitude: 1}
         nextPosition = {latitude: 1, longitude: 2}
-        app = new App(startingPosition)
+        app.setStartingPosition(startingPosition)
 
         expect(Math.round(app.feetTraveled(nextPosition))).toEqual(111)
     })

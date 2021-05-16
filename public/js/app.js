@@ -3,6 +3,10 @@ class App {
         this.startingPosition = startingPosition
     }
 
+    setStartingPosition(startingPosition){
+        this.startingPosition = startingPosition;
+    }
+
     feetTraveled(anotherPosition) {
         return calculateDistance(
             this.startingPosition.latitude,
