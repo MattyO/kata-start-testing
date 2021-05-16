@@ -1,4 +1,4 @@
-Page.onLoad(function(){
-    app = new App();
-    app.start()
-})
+//Page.onLoad(function(){
+//    app = new App();
+//    app.start()
+//})

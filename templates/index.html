@@ -10,7 +10,13 @@
     <script type="application/javascript" src="public/js/function.js"></script>
     <script type="application/javascript" src="public/js/app.js"></script>
     <script type="application/javascript" src="public/js/page.js"></script>
-    <script type="application/javascript" src="public/js/events.js"></script>
+
+    <script type="application/javascript">
+      Page.onLoad(function(){
+          app = new App();
+          app.start();
+      })
+    </script>
 
   </body>
 </html>

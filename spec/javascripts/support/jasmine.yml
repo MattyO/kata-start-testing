@@ -15,7 +15,6 @@
       - public/js/function.js
       - public/js/app.js
       - public/js/page.js
-      - public/js/events.js
 
     # stylesheets
     #
