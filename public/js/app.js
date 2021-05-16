@@ -1,7 +1,4 @@
 class App {
-    constructor(page){
-    }
-
     setStartingPosition(startingPosition){
         this.startingPosition  = startingPosition;
     }
