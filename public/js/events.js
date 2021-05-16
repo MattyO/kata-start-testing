@@ -1,4 +1,4 @@
-$(document).ready(function(){
+Page.onLoad(function(){
     var app = new App()
 
     navigator.geolocation.getCurrentPosition(function(position) {
