@@ -13,6 +13,7 @@
     #
     src_files:
       - public/js/function.js
+      - public/js/app.js
 
     # stylesheets
     #

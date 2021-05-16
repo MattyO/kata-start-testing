@@ -10,3 +10,20 @@ describe("Number", function(){
         expect(number.toRad()).toEqual(Math.PI / 180);
     })
 })
+
+describe("App", function(){
+    it("can be initalized", function(){
+        startingPosition = {latitude: 1, longitude: 1}
+        app = new App(startingPosition)
+        expect(app.startingPosition).toEqual(startingPosition)
+    })
+
+    it(".feetTraveled", function(){
+        startingPosition = {latitude: 1, longitude: 1}
+        nextPosition = {latitude: 1, longitude: 2}
+        app = new App(startingPosition)
+
+        expect(Math.round(app.feetTraveled(nextPosition))).toEqual(111)
+    })
+})
+

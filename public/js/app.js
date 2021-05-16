@@ -1,23 +1,15 @@
-$(document).ready(function(){
-    var startPosition;
+class App {
+    constructor(startingPosition){
+        this.startingPosition = startingPosition
+    }
 
-    navigator.geolocation.getCurrentPosition(function(position) {
-        console.log('getting starting position');
-        startPosition = position;
-    })
+    feetTraveled(anotherPosition) {
+        return calculateDistance(
+            this.startingPosition.latitude,
+            this.startingPosition.longitude,
+            anotherPosition.latitude,
+            anotherPosition.longitude
+        )
+    }
 
-    interval_id = setInterval(function(){
-        navigator.geolocation.getCurrentPosition(function(position) {
-            if(startPosition){
-                var feetTraveled = calculateDistance(
-                    startPosition.coords.latitude, 
-                    startPosition.coords.longitude,
-                    position.coords.latitude, 
-                    position.coords.longitude);
-
-                document.getElementById("distanceTraveled").innerHTML = feetTraveled ;
-            }
-        });
-    }, 5000)
-
-})
+}
