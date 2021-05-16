@@ -1,9 +1,3 @@
-describe("A suite", function() {
-  it("contains spec with an expectation", function() {
-    expect(true).toBe(true);
-  });
-});
-
 describe("calculateDistance", function(){
     it("returns the right distance", function(){
         expect(Math.round(calculateDistance(1, 1, 1, 2))).toEqual(111);
