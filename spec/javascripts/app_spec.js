@@ -30,6 +30,56 @@ describe("App", function(){
 
         expect(Math.round(app.feetTraveled(nextPosition))).toEqual(111)
     })
+
+    describe('.start', function(){
+        beforeEach(function() {
+            currentPosition = {latitude: 1, longitude: 1}
+            currentPositionSpy = spyOn(Page, "currentPosition").and
+                .callFake(function(callback) {
+                    callback(currentPosition);
+                });
+            renderLoopSpy = spyOn(app, 'startRenderLoop')
+        })
+
+        it("set the starting position", function(){
+            setStartingPositionSpy= spyOn(app, 'setStartingPosition').and.returnValue(20)
+
+            app.start()
+
+            expect(setStartingPositionSpy).toHaveBeenCalledWith(currentPosition)
+        })
+
+        it("sets the interval loop", function() {
+            app.start()
+            expect(renderLoopSpy).toHaveBeenCalled()
+        })
+
+    })
+
+    describe(".startRenderLoop", function() {
+        beforeEach(function() {
+        })
+
+        it("sets the content to feet traveled", function() {
+            app.setStartingPosition({"latitude": 1, "longitude": 1})
+            nextPosition = {"latitude": 2, "longitude": 2}
+            currentPositionSpy = spyOn(Page, "currentPosition").and
+                .callFake(function(callback) {
+                    callback(nextPosition);
+                });
+            setIntervalSpy = spyOn(Page, "setInterval").and
+                .callFake(function(callback) {
+                    callback();
+                })
+            feetTraveledSpy = spyOn(app, 'feetTraveled').and.returnValue(20)
+            setContentSpy = spyOn(Page, 'setContent')
+
+            app.startRenderLoop()
+
+            expect(setContentSpy).toHaveBeenCalledWith('distanceTraveled', 20)
+            expect(feetTraveledSpy).toHaveBeenCalledWith(nextPosition)
+        })
+    })
 })
 
 describe("Page", function() {

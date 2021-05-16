@@ -22,11 +22,16 @@ class App {
             that.setStartingPosition(position)
         })
 
+        this.startRenderLoop();
+
+    }
+
+    startRenderLoop(){
+        var that = this
         Page.setInterval(function(){
             Page.currentPosition(function(position){
                 Page.setContent("distanceTraveled", that.feetTraveled(position));
             });
         }, 5000)
     }
-
 }
